@@ -7,6 +7,9 @@ public class Cargi : MonoBehaviour {
     public float speed;
     public float jumpHeight;
     public float gravity;
+    public float camSpeed;
+
+    public GameObject camera;
     
     float jumpVelocity = 0f;
     bool isGround = true;
@@ -16,6 +19,7 @@ public class Cargi : MonoBehaviour {
 
     void Update(){
         Jump();
+        LookForward();
         Move();
     }
 
@@ -24,7 +28,17 @@ public class Cargi : MonoBehaviour {
         if(isGround && Input.GetKeyDown(KeyCode.Space)) jumpVelocity = jumpHeight;
     }
 
-    void Move() => rb.velocity = new Vector3(Input.GetAxis("Horizontal") * speed,jumpVelocity,Input.GetAxis("Vertical") * speed);
+    void LookForward(){
+        float x = Input.GetAxis("Mouse X") * camSpeed;
+        transform.RotateAround(transform.position, Vector3.up, x);
+    }
+
+    void Move(){
+                float x = Input.GetAxisRaw("Horizontal") * speed;
+        float z = Input.GetAxisRaw("Vertical") * speed;
+        Vector3 comFoward = new Vector3(transform.forward.x,0,transform.forward.z).normalized;
+        rb.velocity = comFoward * z + transform.right * x;
+    }
 
     void OnCollisionEnter(Collision other){
         if(other.gameObject.tag == "Floor"){
