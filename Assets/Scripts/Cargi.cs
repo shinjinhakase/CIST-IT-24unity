@@ -16,7 +16,7 @@ public class Cargi : MonoBehaviour {
 
     void Update(){
         Jump();
-        Move();Debug.Log(isGround);
+        Move();
     }
 
     void Jump(){
