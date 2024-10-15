@@ -506,8 +506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e741b5ef859eb40bacc54856481bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XSpeed: 0
-  YSpeed: 0
+  XSpeed: 5
+  YSpeed: 5
 --- !u!1001 &1276113210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -693,6 +693,7 @@ MonoBehaviour:
   speed: 5
   jumpHeight: 10
   gravity: 9.8
+  camSpeed: 5
   camera: {fileID: 963194225}
 --- !u!65 &1293380835
 BoxCollider:
