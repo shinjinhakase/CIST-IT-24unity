@@ -36,7 +36,7 @@ public class Cargi : MonoBehaviour {
     void Move(){
         float x = Input.GetAxisRaw("Horizontal") * speed;
         float z = Input.GetAxisRaw("Vertical") * speed;
-        Vector3 comFoward = new Vector3(transform.forward.x,jumpVelocity,transform.forward.z).normalized;
+        Vector3 comFoward = new Vector3(transform.forward.x,0f,transform.forward.z).normalized;
         Vector3 velocityVector = comFoward * z + transform.right * x;
         rb.velocity = new Vector3 (velocityVector.x,jumpVelocity,velocityVector.z);
     }
