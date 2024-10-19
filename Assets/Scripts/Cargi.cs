@@ -14,8 +14,12 @@ public class Cargi : MonoBehaviour {
     float jumpVelocity = 0f;
     bool isGround = true;
     Rigidbody rb;
+    Animator anim;
     
-    void Start() => rb = GetComponent<Rigidbody>();
+    void Start(){
+        rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+    }
 
     void Update(){
         Jump();
@@ -25,7 +29,10 @@ public class Cargi : MonoBehaviour {
 
     void Jump(){
         if(!isGround) jumpVelocity -= gravity * Time.deltaTime;
-        if(isGround && Input.GetKeyDown(KeyCode.Space)) jumpVelocity = jumpHeight;
+        if(isGround && Input.GetKeyDown(KeyCode.Space)) {
+            jumpVelocity = jumpHeight;
+            
+        }
     }
 
     void LookForward(){
@@ -38,18 +45,24 @@ public class Cargi : MonoBehaviour {
         float z = Input.GetAxisRaw("Vertical") * speed;
         Vector3 comFoward = new Vector3(transform.forward.x,0f,transform.forward.z).normalized;
         Vector3 velocityVector = comFoward * z + transform.right * x;
-        rb.velocity = new Vector3 (velocityVector.x,jumpVelocity,velocityVector.z);
+        rb.velocity = new Vector3(velocityVector.x,jumpVelocity,velocityVector.z);
+        anim.SetFloat("velocity",new Vector3(velocityVector.x,0f,velocityVector.z).magnitude);
     }
 
     void OnCollisionEnter(Collision other){
         if(other.gameObject.tag == "Floor"){
             isGround = true;
             jumpVelocity = 0;
+            anim.SetBool("GetGround",true);
         }
     }
 
     void OnCollisionExit(Collision other){
-        if(other.gameObject.tag == "Floor") isGround = false;
+        if(other.gameObject.tag == "Floor"){
+            isGround = false;
+            anim.SetBool("GetGround",false);
+            anim.SetTrigger("Jump");
+        }
     }
 
 }
