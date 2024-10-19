@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cargi : MonoBehaviour {
 
@@ -14,6 +15,10 @@ public class Cargi : MonoBehaviour {
     public AudioClip jumpSound;
     public AudioClip footsteps;
     public AudioClip dropBGM;
+    public GameObject goalText;
+    public GameObject startText;
+    public GameObject title;
+    public GameObject button;
     
     float jumpVelocity = 0f;
     bool isGround = true;
@@ -28,6 +33,7 @@ public class Cargi : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
+        goalText.SetActive(false);
     }
 
     void Update(){
@@ -42,7 +48,10 @@ public class Cargi : MonoBehaviour {
 
     public void Button(){
         isStart = true;
-        Canvas.SetActive(false);
+        //Canvas.SetActive(false);
+        title.SetActive(false);
+        startText.SetActive(false);
+        button.SetActive(false);
     }
 
     void Jump(){
@@ -77,6 +86,13 @@ public class Cargi : MonoBehaviour {
                 audio.PlayOneShot(dropBGM);
                 isDropBGM = false;
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider other){
+        if(other.gameObject.tag == "Goal"){
+            Debug.Log("goal");
+            goalText.SetActive(true);
         }
     }
 
