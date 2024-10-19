@@ -7,13 +7,16 @@ public class CameraMove : MonoBehaviour {
     public float XSpeed;
     public float YSpeed;
 
+    bool isStart = false;
+
     void Start(){
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
     }
 
     void Update(){
-        CameraRotate_Mouse();
+        if(isStart){
+            CameraRotate_Mouse();
+        }
     }
 
     private void CameraRotate_Mouse(){
@@ -23,4 +26,9 @@ public class CameraMove : MonoBehaviour {
         transform.RotateAround(transform.position, transform.right, -y);
     }
 
+    public void Button(){
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isStart = true;
+    }
 }
