@@ -3317,7 +3317,7 @@ MonoBehaviour:
   Canvas: {fileID: 1812172780}
   jumpSound: {fileID: 8300000, guid: c3fd54f4a44206d41af0a75ec457f311, type: 3}
   footsteps: {fileID: 8300000, guid: 05a3664633acbdc4e9754feee2c34755, type: 3}
-  dropBGM: {fileID: 0}
+  dropBGM: {fileID: 8300000, guid: 0fffc428eb43ca849a6c28eb8ac80048, type: 3}
 --- !u!65 &1293380835
 BoxCollider:
   m_ObjectHideFlags: 0

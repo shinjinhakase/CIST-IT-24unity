@@ -18,7 +18,7 @@ public class Cargi : MonoBehaviour {
     float jumpVelocity = 0f;
     bool isGround = true;
     bool isStart = false;
-    bool isdropBGM = false;
+    bool isDropBGM = false;
     
     Rigidbody rb;
     Animator anim;
@@ -35,6 +35,7 @@ public class Cargi : MonoBehaviour {
             Jump();
             LookForward();
             Move();
+            if(this.transform.position.y > 70) isDropBGM = true;
         }
     }
 
@@ -71,6 +72,10 @@ public class Cargi : MonoBehaviour {
             isGround = true;
             jumpVelocity = 0;
             anim.SetBool("GetGround",true);
+            if(other.gameObject.transform.position.y < 1 && isDropBGM){
+                audio.PlayOneShot(dropBGM);
+                isDropBGM = false;
+            }
         }
     }
 
