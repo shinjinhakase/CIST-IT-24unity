@@ -37,6 +37,7 @@ public class Cargi : MonoBehaviour {
             Move();
             if(this.transform.position.y > 70) isDropBGM = true;
         }
+        if(this.transform.position.y < -1) this.transform.position = new Vector3(0f,1f,0f);
     }
 
     public void Button(){
