@@ -11,16 +11,23 @@ public class Cargi : MonoBehaviour {
 
     public GameObject camera;
     public GameObject Canvas;
+    public AudioClip jumpSound;
+    public AudioClip footsteps;
+    public AudioClip dropBGM;
     
     float jumpVelocity = 0f;
     bool isGround = true;
     bool isStart = false;
+    bool isdropBGM = false;
+    
     Rigidbody rb;
     Animator anim;
+    AudioSource audio;
     
     void Start(){
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Update(){
@@ -40,7 +47,7 @@ public class Cargi : MonoBehaviour {
         if(!isGround) jumpVelocity -= gravity * Time.deltaTime;
         if(isGround && Input.GetKeyDown(KeyCode.Space)) {
             jumpVelocity = jumpHeight;
-            
+            audio.PlayOneShot(jumpSound);
         }
     }
 
@@ -56,6 +63,7 @@ public class Cargi : MonoBehaviour {
         Vector3 velocityVector = comFoward * z + transform.right * x;
         rb.velocity = new Vector3(velocityVector.x,jumpVelocity,velocityVector.z);
         anim.SetFloat("velocity",new Vector3(velocityVector.x,0f,velocityVector.z).magnitude);
+        //audio.PlayOneShot(footsteps);
     }
 
     void OnCollisionEnter(Collision other){
