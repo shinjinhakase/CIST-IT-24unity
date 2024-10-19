@@ -10,9 +10,11 @@ public class Cargi : MonoBehaviour {
     public float camSpeed;
 
     public GameObject camera;
+    public GameObject Canvas;
     
     float jumpVelocity = 0f;
     bool isGround = true;
+    bool isStart = false;
     Rigidbody rb;
     Animator anim;
     
@@ -22,9 +24,16 @@ public class Cargi : MonoBehaviour {
     }
 
     void Update(){
-        Jump();
-        LookForward();
-        Move();
+        if(isStart){
+            Jump();
+            LookForward();
+            Move();
+        }
+    }
+
+    public void Button(){
+        isStart = true;
+        Canvas.SetActive(false);
     }
 
     void Jump(){
